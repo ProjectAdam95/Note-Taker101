@@ -1,12 +1,12 @@
-html,
-body {
+html, body {
   height: 100%;
   margin: 0;
   padding: 0;
 }
 
 .save-note, .new-note, .clear-btn {
-  display: none;
+  display: inline-block;
+  margin: 0 5px; /* Add some spacing between buttons */
 }
 
 .icons {
@@ -76,3 +76,4 @@ body {
   padding: 20px;
   cursor: pointer;
 }
+

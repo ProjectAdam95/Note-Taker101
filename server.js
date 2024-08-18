@@ -10,36 +10,42 @@ const PORT = process.env.PORT || 3001;
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-// Serve static files from the "assets" directory inside "src"
-app.use(express.static(path.join(__dirname, 'src/assets')));
+// Serve static files from the root directory
+app.use(express.static(path.join(__dirname)));
 
-// GET all notes
+// Serve the notes.html file
+app.get('/notes', (req, res) => {
+  console.log('Serving notes.html');
+  res.sendFile(path.join(__dirname, 'notes.html'));
+});
+
+// Handle API requests for getting notes
 app.get('/api/notes', (req, res) => {
-  const dbPath = path.join(__dirname, 'src/assets/db', 'db.json');
+  const dbPath = path.join(__dirname, 'src', 'assets', 'db', 'db.json'); // Path to db.json
   fs.readFile(dbPath, 'utf8', (err, data) => {
     if (err) {
-      console.error('Error reading db.json:', err); // Log read error
-      return res.status(500).json({ error: 'Failed to read notes' }); // Send error response
+      console.error('Error reading db.json:', err);
+      return res.status(500).json({ error: 'Failed to read notes' });
     }
     try {
       const notes = JSON.parse(data);
       res.json(notes);
     } catch (parseErr) {
-      console.error('Error parsing JSON:', parseErr); // Log parse error
-      res.status(500).json({ error: 'Failed to parse notes' }); // Send error response
+      console.error('Error parsing JSON:', parseErr);
+      res.status(500).json({ error: 'Failed to parse notes' });
     }
   });
 });
 
-// Save a new note
+// Handle API requests for saving a new note
 app.post('/api/notes', (req, res) => {
   const newNote = req.body;
   newNote.id = uuidv4(); // Assign unique ID
 
-  const dbPath = path.join(__dirname, 'src/assets/db', 'db.json');
+  const dbPath = path.join(__dirname, 'src', 'assets', 'db', 'db.json'); // Path to db.json
   fs.readFile(dbPath, 'utf8', (err, data) => {
     if (err) {
-      console.error('Error reading db.json:', err); // Log read error
+      console.error('Error reading db.json:', err);
       return res.status(500).json({ error: 'Failed to save note' });
     }
     try {
@@ -48,26 +54,26 @@ app.post('/api/notes', (req, res) => {
 
       fs.writeFile(dbPath, JSON.stringify(notes, null, 2), (writeErr) => {
         if (writeErr) {
-          console.error('Error writing to db.json:', writeErr); // Log write error
+          console.error('Error writing to db.json:', writeErr);
           return res.status(500).json({ error: 'Failed to save note' });
         }
         res.json(newNote);
       });
     } catch (parseErr) {
-      console.error('Error parsing JSON:', parseErr); // Log parse error
-      res.status(500).json({ error: 'Failed to save note' }); // Send error response
+      console.error('Error parsing JSON:', parseErr);
+      res.status(500).json({ error: 'Failed to save note' });
     }
   });
 });
 
-// Delete a note by ID
+// Handle API requests for deleting a note
 app.delete('/api/notes/:id', (req, res) => {
   const noteId = req.params.id;
 
-  const dbPath = path.join(__dirname, 'src/assets/db', 'db.json');
+  const dbPath = path.join(__dirname, 'src', 'assets', 'db', 'db.json'); // Path to db.json
   fs.readFile(dbPath, 'utf8', (err, data) => {
     if (err) {
-      console.error('Error reading db.json:', err); // Log read error
+      console.error('Error reading db.json:', err);
       return res.status(500).json({ error: 'Failed to delete note' });
     }
     try {
@@ -76,7 +82,7 @@ app.delete('/api/notes/:id', (req, res) => {
 
       fs.writeFile(dbPath, JSON.stringify(notes, null, 2), (writeErr) => {
         if (writeErr) {
-          console.error('Error writing to db.json:', writeErr); // Log write error
+          console.error('Error writing to db.json:', writeErr);
           return res.status(500).json({ error: 'Failed to delete note' });
         }
         res.json({ success: true });
@@ -88,14 +94,9 @@ app.delete('/api/notes/:id', (req, res) => {
   });
 });
 
-// Return the notes.html file
-app.get('/notes', (req, res) => {
-  res.sendFile(path.join(__dirname, 'notes.html'));
-});
-
-// Handle all other requests, return index.html
+// Handle all other requests and return index.html
 app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, 'index.html'));
+  res.sendFile(path.join(__dirname, 'index.html')); // Serve index.html for all other routes
 });
 
 // Start the server
