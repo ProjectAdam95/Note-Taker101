@@ -1,7 +1,7 @@
-const express = require('express');
-const fs = require('fs');
-const path = require('path');
-const { v4: uuidv4 } = require('uuid'); // For generating unique IDs
+const express = require('express'); // Import the Express.js framework
+const fs = require('fs'); // Import the File System module to handle file operations
+const path = require('path'); // Import the Path module for handling and transforming file paths
+const { v4: uuidv4 } = require('uuid'); // Import the UUID module for generating unique IDs
 
 const app = express();
 const PORT = process.env.PORT || 3001;
@@ -18,15 +18,15 @@ app.get('/api/notes', (req, res) => {
   const dbPath = path.join(__dirname, 'src/assets/db', 'db.json');
   fs.readFile(dbPath, 'utf8', (err, data) => {
     if (err) {
-      console.error('Error reading db.json:', err);
-      return res.status(500).json({ error: 'Failed to read notes' });
+      console.error('Error reading db.json:', err); // Log read error
+      return res.status(500).json({ error: 'Failed to read notes' }); // Send error response
     }
     try {
       const notes = JSON.parse(data);
       res.json(notes);
     } catch (parseErr) {
-      console.error('Error parsing JSON:', parseErr);
-      res.status(500).json({ error: 'Failed to parse notes' });
+      console.error('Error parsing JSON:', parseErr); // Log parse error
+      res.status(500).json({ error: 'Failed to parse notes' }); // Send error response
     }
   });
 });
@@ -39,8 +39,8 @@ app.post('/api/notes', (req, res) => {
   const dbPath = path.join(__dirname, 'src/assets/db', 'db.json');
   fs.readFile(dbPath, 'utf8', (err, data) => {
     if (err) {
-      console.error('Error reading db.json:', err);
-      return res.status(500).json({ error: 'Failed to save note' });
+      console.error('Error reading db.json:', err); // Log read error
+      return res.status(500).json({ error: 'Failed to save note' }); 
     }
     try {
       const notes = JSON.parse(data);
@@ -48,14 +48,14 @@ app.post('/api/notes', (req, res) => {
 
       fs.writeFile(dbPath, JSON.stringify(notes, null, 2), (writeErr) => {
         if (writeErr) {
-          console.error('Error writing to db.json:', writeErr);
-          return res.status(500).json({ error: 'Failed to save note' });
+          console.error('Error writing to db.json:', writeErr); // Log write error
+          return res.status(500).json({ error: 'Failed to save note' }); 
         }
         res.json(newNote);
       });
     } catch (parseErr) {
-      console.error('Error parsing JSON:', parseErr);
-      res.status(500).json({ error: 'Failed to save note' });
+      console.error('Error parsing JSON:', parseErr); // Log parse error
+      res.status(500).json({ error: 'Failed to save note' }); // Send error response
     }
   });
 });
@@ -67,8 +67,8 @@ app.delete('/api/notes/:id', (req, res) => {
   const dbPath = path.join(__dirname, 'src/assets/db', 'db.json');
   fs.readFile(dbPath, 'utf8', (err, data) => {
     if (err) {
-      console.error('Error reading db.json:', err);
-      return res.status(500).json({ error: 'Failed to delete note' });
+      console.error('Error reading db.json:', err); // Log read error
+      return res.status(500).json({ error: 'Failed to delete note' }); 
     }
     try {
       let notes = JSON.parse(data);
@@ -76,14 +76,14 @@ app.delete('/api/notes/:id', (req, res) => {
 
       fs.writeFile(dbPath, JSON.stringify(notes, null, 2), (writeErr) => {
         if (writeErr) {
-          console.error('Error writing to db.json:', writeErr);
-          return res.status(500).json({ error: 'Failed to delete note' });
+          console.error('Error writing to db.json:', writeErr); // Log write error
+          return res.status(500).json({ error: 'Failed to delete note' }); 
         }
         res.json({ success: true });
       });
     } catch (parseErr) {
-      console.error('Error parsing JSON:', parseErr);
-      res.status(500).json({ error: 'Failed to delete note' });
+      console.error('Error parsing JSON:', parseErr); 
+      res.status(500).json({ error: 'Failed to delete note' }); 
     }
   });
 });
