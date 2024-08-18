@@ -6,6 +6,7 @@ let newNoteBtn;
 let clearBtn;
 let noteList;
 
+// Initialize elements only if on the notes.html page
 if (window.location.pathname === '/notes.html') {
   noteForm = document.querySelector('.note-form');
   noteTitle = document.querySelector('.note-title');
@@ -16,17 +17,17 @@ if (window.location.pathname === '/notes.html') {
   noteList = document.querySelector('.list-container .list-group');
 }
 
-// Show an element
+// Show an element by setting display to 'inline'
 const show = (elem) => {
   elem.style.display = 'inline';
 };
 
-// Hide an element
+// Hide an element by setting display to 'none'
 const hide = (elem) => {
   elem.style.display = 'none';
 };
 
-// activeNote is used to keep track of the note in the textarea
+// activeNote keeps track of the currently selected note
 let activeNote = {};
 
 // Fetch notes from the server
@@ -48,7 +49,7 @@ const saveNote = (note) =>
     body: JSON.stringify(note)
   });
 
-// Delete a note from the server
+// Delete a note from the server using its id
 const deleteNote = (id) =>
   fetch(`/api/notes/${id}`, {
     method: 'DELETE',
@@ -57,7 +58,7 @@ const deleteNote = (id) =>
     }
   });
 
-// Render the active note in the right-hand column
+// Render the currently active note in the form fields
 const renderActiveNote = () => {
   hide(saveNoteBtn);
   hide(clearBtn);
@@ -77,7 +78,7 @@ const renderActiveNote = () => {
   }
 };
 
-// Handle saving a note
+// Handle saving the note
 const handleNoteSave = () => {
   const newNote = {
     title: noteTitle.value,
@@ -108,7 +109,7 @@ const handleNoteDelete = (e) => {
   });
 };
 
-// Handle viewing a note
+// Handle viewing a selected note
 const handleNoteView = (e) => {
   e.preventDefault();
   activeNote = JSON.parse(e.target.parentElement.getAttribute('data-note'));
@@ -122,7 +123,7 @@ const handleNewNoteView = () => {
   hide(newNoteBtn);
 };
 
-// Handle rendering the buttons based on input
+// Handle showing/hiding buttons based on input
 const handleRenderBtns = () => {
   if (!noteTitle.value.trim() && !noteText.value.trim()) {
     hide(saveNoteBtn);
@@ -142,7 +143,7 @@ const renderNoteList = async (notes) => {
 
   let noteListItems = [];
 
-  // Returns HTML element with or without a delete button
+  // Creates a list item element for each note
   const createLi = (text, delBtn = true) => {
     const liEl = document.createElement('li');
     liEl.classList.add('list-group-item');
@@ -187,7 +188,7 @@ const renderNoteList = async (notes) => {
   }
 };
 
-// Fetch and render notes
+// Fetch and render the notes on the page
 const getAndRenderNotes = () => getNotes().then(renderNoteList);
 
 if (window.location.pathname === '/notes.html') {
@@ -198,3 +199,4 @@ if (window.location.pathname === '/notes.html') {
 }
 
 getAndRenderNotes();
+

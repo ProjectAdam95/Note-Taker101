@@ -49,7 +49,7 @@ Note-Taker101/
 │   │   ├── db/
 │   │   │   └── db.json
 │   │   ├── js/
-│   │   │   └── index.js
+│   │       └── index.js
 ├── index.html
 ├── notes.html
 ├── package-lock.json
@@ -71,7 +71,7 @@ Build
 
 ### :rocket: Deployment
 
-- To deploy the website please visit : ENTER WEBSITE HERE
+- To deploy the website please visit : [CLICK HERE](https://note-taker101.onrender.com/)
 
  ###  :fire: Contribution
 
@@ -102,7 +102,7 @@ Development Tools:
 ##  :camera: Gallery
 Below is a preview photo of the website.
 
-Click here to view preview photos: [PREVIEW PHOTOS HERE](https://imgur.com/a/m2HzQ3d)
+Click here to view preview photos: [CLICK HERE](https://imgur.com/a/m2HzQ3d)
 
 
 ## :star2: Credit/Acknowledgment

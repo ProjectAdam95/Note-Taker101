@@ -1,14 +1,17 @@
+/* Set the full height for the HTML and body, and remove default margins and padding */
 html, body {
   height: 100%;
   margin: 0;
   padding: 0;
 }
 
+/* Style buttons for saving, creating, and clearing notes */
 .save-note, .new-note, .clear-btn {
   display: inline-block;
-  margin: 0 5px; /* Add some spacing between buttons */
+  margin: 0 5px;
 }
 
+/* Style icon container with margins, larger font size, and pointer cursor */
 .icons {
   margin-left: 15px;
   margin-right: 15px;
@@ -16,6 +19,7 @@ html, body {
   cursor: pointer;
 }
 
+/* Common styles for note textarea and title */
 .note-textarea,
 .note-title {
   color: #000000;
@@ -24,34 +28,40 @@ html, body {
   border: none;
 }
 
+/* Specific styles for the note textarea */
 .note-textarea {
-  resize: none;
-  height: calc(100% - 63px);
+  resize: none; /* Disable resizing */
+  height: calc(100% - 63px); /* Adjust height based on other elements */
   padding-top: 15px;
 }
 
+/* Specific styles for the note title input */
 .note-title {
   height: 50px;
   margin-top: 13px;
-  font-size: 3rem;
+  font-size: 3rem; /* Large font size for the title */
 }
 
+/* Read-only styles for note title and textarea */
 .note-title:read-only,
 .note-textarea:read-only {
-  color: #757575;
+  color: #757575; /* Gray color when read-only */
 }
 
+/* Card styling inside the list container */
 .list-container .card {
-  height: calc(100vh - 70px);
+  height: calc(100vh - 70px); /* Full viewport height minus navbar */
   border-bottom: none;
   border-bottom-right-radius: 0;
   border-bottom-left-radius: 0;
 }
 
+/* Remove padding from the list container */
 .list-container {
   padding-left: 0;
 }
 
+/* Styling for the list group and its first child */
 .list-container .list-group,
 .list-container .list-group-item:first-child,
 .list-container .card {
@@ -60,16 +70,19 @@ html, body {
   border-top-left-radius: 0;
 }
 
+/* Title inside the list item, taking up 75% of the width */
 .list-item-title {
   display: inline-block;
   width: 75%;
 }
 
+/* Icon styles within the list container */
 .list-container i {
   font-size: 1.1rem;
   cursor: pointer;
 }
 
+/* List group item styling */
 .list-container .list-group-item {
   border-left: none;
   border-right: none;
