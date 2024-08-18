@@ -36,25 +36,22 @@ The next page allows the user to create new notes and have a list of saved notes
 Below is a view of the file structure deployed to GitHub.
 
 ```plaintext
+
 Note-Taker101/
-│
-├── assets/
-│   ├── css/
-│   │   └── styles.css
-│   ├── db/
-│   │   └── db.json
-│   ├── js/
-│   │   └── index.js
-│   └── preview-photos/
-│       ├── Preview1.png
-│       └── Preview2.png
-│
-├── views/
-│   ├── index.html
-│   └── notes.html
-│
 ├── node_modules/
-│
+├── preview photos/
+│   ├── Preview1.png
+│   └── Preview2.png
+├── src/
+│   ├── assets/
+│   │   ├── css/
+│   │   │   └── styles.css
+│   │   ├── db/
+│   │   │   └── db.json
+│   │   ├── js/
+│   │   │   └── index.js
+├── index.html
+├── notes.html
 ├── package-lock.json
 ├── package.json
 ├── README.md
