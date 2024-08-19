@@ -49,7 +49,7 @@ Note-Taker101/
 │   │   ├── db/
 │   │   │   └── db.json
 │   │   ├── js/
-│   │       └── index.js
+│            └── index.js
 ├── index.html
 ├── notes.html
 ├── package-lock.json
